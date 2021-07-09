@@ -53,7 +53,8 @@ function drawImageCanvas(imageElement, canvas){
 
 
 function loadDemo(){
-	alert("Demo not yet available.");
+	loadImage("WheresWaldo_scene.jpg", cv_canvas);
+	loadImage("Waldo_opaque.png", template_canvas);
 }
 
 
