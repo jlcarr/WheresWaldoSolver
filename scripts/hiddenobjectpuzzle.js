@@ -20,7 +20,7 @@ function onOpenCvReady() {
 	document.getElementById("loading").innerHTML = "Done loading OpenCV";
 	
 	outlineColor = new cv.Scalar(255, 255, 255, 255);
-	tintColor = new cv.Scalar(0, 0, 0, 100);
+	tintColor = new cv.Scalar(0, 0, 0, 255);
 	clearColor = new cv.Scalar(0, 0, 0, 0);
 }
 
@@ -57,6 +57,12 @@ function loadDemo(){
 }
 
 
+function findButton(){
+	document.getElementById("loading").innerHTML = "Processing...";
+	findHidden();
+	document.getElementById("loading").innerHTML = "Done!";
+}
+
 function findHidden(){
 	if (typeof cv === 'undefined') alert("Error: OpenCV is still loading. Please wait.");
 	let src = cv.imread('cv-canvas');
@@ -71,9 +77,15 @@ function findHidden(){
 	
 	let result = cv.minMaxLoc(dst);
 	let maxPoint = result.maxLoc;
-	//let maxRect = new cv.Rect(maxPoint.x, maxPoint.y, template.cols, template.rows);
+	let maxRect = new cv.Rect(maxPoint.x, maxPoint.y, template.cols, template.rows);
 	let oppositePoint = new cv.Point(maxPoint.x + template.cols, maxPoint.y + template.rows);
 	
+	let resultImg = src.roi(maxRect).clone();
+	
+	
+	let black = new cv.Mat(src.rows, src.cols, src.type(), tintColor);
+    cv.addWeighted(src, 0.5, black, 0.5, 0.0, src);
+    resultImg.copyTo(src.roi(maxRect));
 	
 	cv.rectangle(src, maxPoint, oppositePoint, outlineColor, 2, cv.LINE_8, 0);
 	//cv.rectangle(src, maxPoint, point, tintColor, cv.FILLED, cv.LINE_8, 0);
@@ -84,4 +96,6 @@ function findHidden(){
 	src.delete();
 	dst.delete();
 	template.delete();
+	black.delete();
+	resultImg.delete();
 }
