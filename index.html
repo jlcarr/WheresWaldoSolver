@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Where's Waldo Solver</title>
+		<script async type="text/javascript" src="https://docs.opencv.org/3.4.0/opencv.js" onload="onOpenCvReady();"></script>
+		<script src="scripts/hiddenobjectpuzzle.js"></script>
+	</head>
+	<body>
+		<h1>Where's Waldo Solver</h1>
+		<div id="loading">Loading OpenCV. Please wait...</div>
+		<h2>Instructions</h2>
+		<p>
+			<ol>
+				<li>Select a source image to search within (or press the "Load Demo" button)</li>
+				<li>Select a template to search for (or press the "Load Demo" button)</li>
+				<li>Press the "Find" button</li>
+			</ol>
+		<h2>Input Controls</h2>
+		Source Image : <input type="file" id="file-input"/>
+		<br>
+		Template Image : <input type="file" id="file-input-template"/>
+		<br>
+		<button type="button" onclick="findHidden();">Find</button>
+		<br><br>
+		<button type="button" onclick="loadDemo();">Load Demo</button>
+		<h2>
+		<h3>Template<h3>
+		<canvas id="template-canvas" width="10" height="10" style="border: 1px solid black;">
+		  Oh no! Your browser doesn't support canvas!
+		</canvas>
+		<br>
+		<h3>Source<h3>
+		<canvas id="cv-canvas" width="250" height="250" style="border: 1px solid black;">
+		  Oh no! Your browser doesn't support canvas!
+		</canvas>
+	</body>
+	<script>
+
+	</script>
+</html>
